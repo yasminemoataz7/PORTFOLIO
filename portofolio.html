@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yasmine Moataz | Mobile Developer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #F55540;
+            --primary-dark: #d43f2e;
+            --primary-glow: rgba(245, 85, 64, 0.3);
+            --bg-dark: #07070a;
+            --bg-darker: #050507;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --card-bg-hover: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-border-hover: rgba(245, 85, 64, 0.3);
+            --text-main: #ffffff;
+            --text-dim: #949494;
+            --text-bright: #ffffff;
+        }
+
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
+
+        body { 
+            background-color: var(--bg-dark); 
+            color: var(--text-main); 
+            font-family: 'Poppins', sans-serif; 
+            scroll-behavior: smooth; 
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-darker);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-dark);
+        }
+
+        .glow { 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            background: radial-gradient(circle at 10% 10%, rgba(245, 85, 64, 0.15), transparent 40%), 
+                        radial-gradient(circle at 90% 90%, rgba(0, 191, 165, 0.08), transparent 40%); 
+            z-index: -1; 
+            pointer-events: none;
+        }
+
+        /* Navigation */
+        nav { 
+            position: fixed; 
+            top: 0; 
+            width: 100%; 
+            padding: 20px 10%; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            background: rgba(7, 7, 10, 0.85); 
+            backdrop-filter: blur(20px); 
+            border-bottom: 1px solid var(--glass-border); 
+            z-index: 1000; 
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            padding: 15px 10%;
+            background: rgba(7, 7, 10, 0.95);
+            border-bottom-color: var(--primary-glow);
+        }
+
+        .logo { 
+            font-size: 1.5rem; 
+            font-weight: 700; 
+            letter-spacing: 1px;
+        } 
+
+        .logo span { 
+            color: var(--primary);
+            font-size: 1.8rem;
+        }
+
+        nav ul { 
+            display: flex; 
+            list-style: none; 
+            gap: 40px; 
+        }
+
+        nav a { 
+            text-decoration: none; 
+            color: var(--text-dim); 
+            font-size: 0.9rem; 
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover { 
+            color: var(--text-main); 
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Sections */
+        section { 
+            padding: 120px 10%; 
+        }
+
+        .section-tag { 
+            color: var(--primary); 
+            font-size: 0.85rem; 
+            font-weight: 600; 
+            text-transform: uppercase; 
+            letter-spacing: 2px;
+            margin-bottom: 15px; 
+            display: block; 
+        }
+
+        .section-title { 
+            font-size: 2.5rem; 
+            margin-bottom: 50px; 
+            font-weight: 700; 
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            text-transform: capitalize;
+        }
+
+        .hero h1 span {
+            color: var(--primary);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin-bottom: 30px;
+        }
+
+        /* Grid System */
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 30px; 
+        }
+
+        /* Cards */
+        .card { 
+            background: var(--card-bg); 
+            border: 1px solid var(--glass-border); 
+            border-radius: 24px; 
+            padding: 35px; 
+            transition: all 0.3s ease; 
+            backdrop-filter: blur(10px);
+        }
+
+        .card:hover { 
+            border-color: var(--primary); 
+            background: var(--card-bg-hover);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(245, 85, 64, 0.1);
+        }
+
+        /* About Box */
+        .about-box { 
+            background: linear-gradient(135deg, var(--card-bg) 0%, rgba(245, 85, 64, 0.05) 100%);
+            padding: 50px; 
+            border-left: 5px solid var(--primary); 
+            border-radius: 24px; 
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .about-box p {
+            font-size: 1.15rem;
+            line-height: 1.9;
+            color: var(--text-dim);
+        }
+
+        /* ===== ADVANCED SKILLS SECTION DESIGN ===== */
+        /* Technical Skills - Icon Cards */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .skill-card {
+            background: linear-gradient(145deg, rgba(255,255,255,0.02) 0%, rgba(245,85,64,0.05) 100%);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 30px 20px;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(245, 85, 64, 0.1), transparent);
+            transition: left 0.7s ease;
+        }
+
+        .skill-card:hover::before {
+            left: 100%;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: var(--primary);
+            box-shadow: 0 20px 30px rgba(245, 85, 64, 0.2);
+        }
+
+        .skill-icon-wrapper {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(245, 85, 64, 0.1);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .skill-card:hover .skill-icon-wrapper {
+            background: rgba(245, 85, 64, 0.2);
+            transform: rotate(360deg);
+        }
+
+        .skill-icon { 
+            font-size: 3rem; 
+            color: var(--primary); 
+            transition: all 0.3s ease;
+        }
+
+        .skill-card:hover .skill-icon {
+            color: var(--text-main);
+            transform: scale(1.1);
+        }
+
+        .skill-card h3 {
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .skill-card p {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+
+        /* Soft Skills - Glass Morphism Cards */
+        .soft-skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .soft-skill-card {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+            padding: 30px 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .soft-skill-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.5s ease;
+        }
+
+        .soft-skill-card:hover::after {
+            transform: translateX(100%);
+        }
+
+        .soft-skill-card:hover {
+            background: rgba(245, 85, 64, 0.05);
+            border-color: var(--primary);
+            transform: scale(1.05);
+        }
+
+        .soft-skill-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            opacity: 0.8;
+            transition: all 0.3s ease;
+        }
+
+        .soft-skill-card:hover .soft-skill-icon {
+            opacity: 1;
+            transform: scale(1.2);
+        }
+
+        .soft-skill-card h3 {
+            font-size: 1.2rem;
+            color: var(--text-main);
+        }
+
+        /* Tools - Modern Tech Stack Cards */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+        }
+
+        .tool-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.02) 0%, rgba(0,0,0,0.2) 100%);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tool-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle at top right, rgba(245, 85, 64, 0.1), transparent 70%);
+            border-radius: 50%;
+            transform: translate(30px, -30px);
+            transition: all 0.5s ease;
+        }
+
+        .tool-card:hover::before {
+            transform: translate(20px, -20px) scale(1.5);
+        }
+
+        .tool-card:hover {
+            border-color: var(--primary);
+            transform: translateX(10px);
+            background: rgba(245, 85, 64, 0.05);
+        }
+
+        .tool-icon-wrapper {
+            width: 50px;
+            height: 50px;
+            background: rgba(245, 85, 64, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .tool-card:hover .tool-icon-wrapper {
+            background: var(--primary);
+            transform: rotate(5deg);
+        }
+
+        .tool-icon {
+            font-size: 1.8rem;
+            color: var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .tool-card:hover .tool-icon {
+            color: var(--text-main);
+        }
+
+        .tool-card h3 {
+            font-size: 1.1rem;
+            color: var(--text-main);
+        }
+
+        /* Section headings for skills */
+        .skills-subtitle {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 40px 0 25px;
+        }
+
+        .skills-subtitle h3 {
+            font-size: 1.8rem;
+            color: var(--text-main);
+        }
+
+        .skills-subtitle-line {
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), transparent);
+        }
+
+        /* Buttons */
+        .btn { 
+            padding: 15px 35px; 
+            border-radius: 50px; 
+            background: var(--primary); 
+            color: white; 
+            font-weight: 600; 
+            text-decoration: none; 
+            display: inline-block; 
+            transition: all 0.3s ease; 
+            border: 2px solid transparent;
+            margin-right: 15px;
+            box-shadow: 0 5px 15px rgba(245, 85, 64, 0.3);
+        }
+
+        .btn:hover { 
+            background: transparent; 
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(245, 85, 64, 0.4);
+        }
+
+        .btn-wa { 
+            background: #25D366; 
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+        }
+
+        .btn-wa:hover {
+            background: transparent;
+            border-color: #25D366;
+            color: #25D366;
+        }
+
+        /* Projects Section */
+        .projects-section { 
+            padding: 120px 10%; 
+            background: linear-gradient(180deg, var(--bg-dark) 0%, var(--bg-darker) 100%);
+        }
+
+        .projects-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
+            gap: 30px; 
+        }
+
+        .project-card { 
+            background: var(--card-bg); 
+            border: 1px solid var(--glass-border); 
+            border-radius: 24px; 
+            padding: 30px; 
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(245, 85, 64, 0.15);
+        }
+
+        .project-meta { 
+            color: var(--primary); 
+            font-size: 0.85rem; 
+            display: inline-block; 
+            margin-bottom: 20px; 
+            padding: 5px 15px;
+            background: rgba(245, 85, 64, 0.1);
+            border-radius: 50px;
+        }
+
+        .project-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .project-card p { 
+            margin-bottom: 15px; 
+            font-size: 0.95rem; 
+            color: var(--text-dim); 
+            line-height: 1.7;
+        }
+
+        .tags { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 8px;
+            margin-top: 20px;
+        }
+
+        .tags span { 
+            background: rgba(255,255,255,0.05); 
+            padding: 6px 15px; 
+            border-radius: 50px; 
+            font-size: 0.8rem; 
+            border: 1px solid var(--glass-border);
+            transition: all 0.3s ease;
+        }
+
+        .tags span:hover {
+            border-color: var(--primary);
+            background: rgba(245, 85, 64, 0.1);
+        }
+
+        /* Footer */
+        .footer { 
+            background: linear-gradient(180deg, var(--bg-dark) 0%, #000000 100%);
+            padding: 80px 10% 30px; 
+            border-top: 1px solid var(--glass-border); 
+            color: var(--text-dim); 
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+        }
+
+        .footer-container { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 60px; 
+            justify-content: space-between; 
+            margin-bottom: 50px; 
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-brand { 
+            max-width: 350px; 
+        }
+
+        .footer-brand .logo { 
+            font-size: 2rem; 
+            margin-bottom: 20px; 
+            color: var(--text-main); 
+            font-weight: 700; 
+        }
+
+        .footer-brand p {
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        .footer-links h3, .footer-social h3 { 
+            color: var(--text-main); 
+            margin-bottom: 25px; 
+            font-size: 1.2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-links h3::after, .footer-social h3::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 30px;
+            height: 2px;
+            background: var(--primary);
+        }
+
+        .footer-links ul { 
+            list-style: none; 
+        }
+
+        .footer-links li { 
+            margin-bottom: 12px; 
+        }
+
+        .footer-links a { 
+            text-decoration: none; 
+            color: var(--text-dim); 
+            transition: all 0.3s ease; 
+            font-size: 0.95rem;
+            display: inline-block;
+        }
+
+        .footer-links a:hover { 
+            color: var(--primary); 
+            transform: translateX(5px);
+        }
+
+        .footer-social .social-icons { 
+            display: flex; 
+            gap: 20px; 
+        }
+
+        .footer-social a { 
+            color: var(--text-main); 
+            font-size: 1.8rem; 
+            transition: all 0.3s ease; 
+            opacity: 0.7;
+        }
+
+        .footer-social a:hover { 
+            color: var(--primary); 
+            opacity: 1;
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom { 
+            text-align: center; 
+            border-top: 1px solid var(--glass-border); 
+            padding-top: 30px; 
+            font-size: 0.9rem; 
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Reveal Animation */
+        .reveal { 
+            opacity: 0; 
+            transform: translateY(30px); 
+            transition: all 1s ease-out; 
+        }
+
+        .reveal.active { 
+            opacity: 1; 
+            transform: translateY(0); 
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            section { padding: 100px 5%; }
+            .hero h1 { font-size: 3rem; }
+            .skills-subtitle h3 { font-size: 1.5rem; }
+        }
+
+        @media (max-width: 768px) {
+            nav { padding: 15px 5%; }
+            nav ul { gap: 20px; }
+            nav a { font-size: 0.8rem; }
+            
+            .hero h1 { font-size: 2.5rem; }
+            .section-title { font-size: 2rem; }
+            
+            .footer-container { gap: 40px; }
+            .footer-brand { max-width: 100%; }
+            
+            .skills-grid, .soft-skills-grid, .tools-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav ul { gap: 15px; }
+            nav a { font-size: 0.7rem; }
+            
+            .hero h1 { font-size: 2rem; }
+            .btn { display: block; margin-bottom: 15px; text-align: center; }
+            
+            .projects-grid { grid-template-columns: 1fr; }
+            
+            .skills-subtitle {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 5px;
+            }
+        }
+
+        /* Additional Polish */
+        .fa-solid, .fa-regular, .fab {
+            transition: all 0.3s ease;
+        }
+
+        strong {
+            color: var(--text-main);
+        }
+
+        .card h3 {
+            margin-bottom: 15px;
+            color: var(--text-main);
+        }
+
+        .card ul li {
+            margin-bottom: 8px;
+            color: var(--text-dim);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover ul li {
+            color: var(--text-main);
+        }
+    </style>
+</head>
+<body>
+    <div class="glow"></div>
+
+    <nav>
+        <div class="logo">YM<span>.</span></div>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about-me">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section id="home" class="hero">
+        <h1 class="reveal">Hi, I'm <span>yasmine moataz</span><br>Mobile Developer</h1>
+        <p class="reveal" style="font-size: 1.2rem; color: var(--text-dim);">I build scalable, high-performance mobile applications.</p>
+        <div class="reveal" style="margin-top: 30px;">
+            <a href="mailto:yasminemoataz13@gmail.com" class="btn">Email Me</a>
+            <a href="https://wa.me/201003819669" class="btn btn-wa">WhatsApp</a>
+        </div>
+    </section>
+
+    <section id="about-me" class="reveal">
+        <span class="section-tag">About Me</span>
+        <div class="about-box">
+            <p style="font-size: 1.1rem; line-height: 1.8;">Hi, I'm a Flutter Developer dedicated to building high-performance cross-platform applications. I bring proactive problem-solving to the table—anticipating your product's needs and implementing features before they are even requested. My tech stack includes Flutter, Firebase, APIs, and advanced state management to deliver robust solutions.</p>
+        </div>
+    </section>
+    
+    <section id="education-certificates" class="reveal">
+        <span class="section-tag">Background</span>
+        <h2 class="section-title">Education & Certificates</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Education</h3>
+                <p><strong>Bachelor of Computer Science</strong><br>
+                Misr International University (2023 - 2027)</p>
+                <p style="margin-top: 10px; color: var(--text-dim);">Specialization: Computer Science<br>
+                Coursework: Algorithms, Software Engineering, Data Structures, OOP.</p>
+            </div>
+            <div class="card">
+                <h3>Certificates</h3>
+                <p><strong>Web Development</strong><br>
+                Central Administration of Information Technology (ITI)</p>
+                <ul style="margin-top: 10px; color: var(--text-dim); list-style: none;">
+                    <li>✓ HTML5, CSS3</li>
+                    <li>✓ .Net Framework</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>Certificates</h3>
+                <p><strong>Flutter Mobile Development</strong><br>
+               DEPI</p>
+                <ul style="margin-top: 10px; color: var(--text-dim); list-style: none;">
+                    <li>✓ Dart, Flutter</li>
+                    <li>✓ API, Firebase</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    
+    <section id="skills" class="reveal">
+        <span class="section-tag">Expertise</span>
+        <h2 class="section-title">Technical Skills, Soft Skills & Tools</h2>
+        
+        <!-- Technical Skills - Same content, advanced design -->
+        <div class="skills-subtitle">
+            <h3>Technical</h3>
+            <div class="skills-subtitle-line"></div>
+        </div>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <div class="skill-icon-wrapper">
+                    <i class="devicon-flutter-plain skill-icon"></i>
+                </div>
+                <h3>Mobile</h3>
+                <p>Flutter, Dart, Responsive UI</p>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon-wrapper">
+                    <i class="devicon-firebase-plain skill-icon"></i>
+                </div>
+                <h3>Backend</h3>
+                <p>Auth, Firestore, Firebase</p>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon-wrapper">
+                    <i class="devicon-git-plain skill-icon"></i>
+                </div>
+                <h3>API Integration</h3>
+                <p>RESTful APIs & Data Handling</p>
+            </div>
+        </div>
+
+        <!-- Soft Skills - Same content, advanced design -->
+        <div class="skills-subtitle">
+            <h3>Soft Skills</h3>
+            <div class="skills-subtitle-line"></div>
+        </div>
+        <div class="soft-skills-grid">
+            <div class="soft-skill-card">
+                <div class="soft-skill-icon">
+                    <i class="fa-solid fa-lightbulb"></i>
+                </div>
+                <h3>Problem Solving</h3>
+            </div>
+            <div class="soft-skill-card">
+                <div class="soft-skill-icon">
+                    <i class="fa-solid fa-people-group"></i>
+                </div>
+                <h3>Leadership</h3>
+            </div>
+            <div class="soft-skill-card">
+                <div class="soft-skill-icon">
+                    <i class="fa-solid fa-handshake"></i>
+                </div>
+                <h3>Teamwork</h3>
+            </div>
+        </div>
+
+        <!-- Tools - Same content, advanced design -->
+        <div class="skills-subtitle">
+            <h3>Tools I Use</h3>
+            <div class="skills-subtitle-line"></div>
+        </div>
+        <div class="tools-grid">
+            <div class="tool-card">
+                <div class="tool-icon-wrapper">
+                    <i class="devicon-vscode-plain tool-icon"></i>
+                </div>
+                <h3>VS Code / Android Studio</h3>
+            </div>
+            <div class="tool-card">
+                <div class="tool-icon-wrapper">
+                    <i class="devicon-figma-plain tool-icon"></i>
+                </div>
+                <h3>Figma</h3>
+            </div>
+            <div class="tool-card">
+                <div class="tool-icon-wrapper">
+                    <i class="devicon-git-plain tool-icon"></i>
+                </div>
+                <h3>Git / SSMS</h3>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="reveal">
+        <span class="section-tag">Career Journey</span>
+        <h2 class="section-title">Experience</h2>
+        <div class="card" style="border-left: 5px solid var(--primary);">
+            <div style="margin-bottom: 15px; display: inline-block; padding: 5px 15px; background: rgba(245, 85, 64, 0.1); border-radius: 50px; color: var(--primary); font-size: 0.9rem;">
+                Nov 2025 - Aug 2026
+            </div>
+            <h3 style="font-size: 1.8rem; margin-bottom: 10px;">Cross Platform App Development</h3>
+            <p style="color: var(--primary); margin-bottom: 20px;">Digital Egypt Pioneers Initiative (DEPI) - Hybrid</p>
+            
+            <p style="margin-bottom: 15px;"><strong>Action:</strong> Training in Dart, Flutter, API integration, and Firebase, while consistently documenting and unit testing code.</p>
+            <p><strong>Result:</strong> Successfully developed scalable mobile applications ready for deployment on Android platforms.</p>
+        </div>
+    </section>
+    
+    <section id="services" class="reveal">
+        <h2 class="section-title">My <span>Services</span></h2>
+        <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));">
+            
+            <div class="card">
+                <i class="fa-solid fa-mobile-screen" style="font-size: 3rem; color: var(--primary); margin-bottom: 20px; display: block;"></i>
+                <h3 style="margin-bottom: 15px;">App Development</h3>
+                <p style="margin-bottom: 20px; color: var(--text-dim);">Building high-quality Android apps using Flutter codebase.</p>
+                <ul style="list-style: none; color: var(--text-main);">
+                    <li style="margin-bottom: 8px;">● Flutter & Dart</li>
+                    <li style="margin-bottom: 8px;">● State Management</li>
+                    <li>● Responsive UI/UX</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <i class="fa-solid fa-chart-line" style="font-size: 3rem; color: var(--primary); margin-bottom: 20px; display: block;"></i>
+                <h3 style="margin-bottom: 15px;">Creative & Responsive UI</h3>
+                <p style="margin-bottom: 20px; color: var(--text-dim);">Building engaging and creative UI</p>
+                <ul style="list-style: none; color: var(--text-main);">
+                    <li style="margin-bottom: 8px;">● Dart</li>
+                    <li style="margin-bottom: 8px;">● Figma</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <i class="fa-solid fa-database" style="font-size: 3rem; color: var(--primary); margin-bottom: 20px; display: block;"></i>
+                <h3 style="margin-bottom: 15px;">Backend</h3>
+                <p style="margin-bottom: 20px; color: var(--text-dim);">Integrating apps with Firebase, REST APIs</p>
+                <ul style="list-style: none; color: var(--text-main);">
+                    <li style="margin-bottom: 8px;">● Firebase Auth</li>
+                    <li style="margin-bottom: 8px;">● RESTful API Integration</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="projects-section">
+        <h2 class="section-title">Projects</h2>
+        <div class="projects-grid">
+            
+            <div class="project-card">
+                <h3>Movie Website</h3>
+                <span class="project-meta">University Project</span>
+                <p><strong>Challenge:</strong> Creating a movie website app that works smoothly on low-end devices.</p>
+                <p><strong>Action:</strong> Implemented clean architecture and user friendly interface.</p>
+                <div class="tags"><span>HTML</span><span>CSS</span><span>JS</span></div>
+            </div>
+
+            <div class="project-card">
+                <h3>Food Ordering App for University</h3>
+                <span class="project-meta">University Project</span>
+                <p><strong>Challenge:</strong> Developing a full e-commerce flow in a very short timeframe.</p>
+                <p><strong>Action:</strong> Used attractive UI and for backend PHP and JS also design patterns.</p>
+                <p><strong>Result:</strong> Delivered a fully functional, real-time shopping application.</p>
+                <div class="tags"><span>PHP</span> <span>JavaScript</span> <span>HTML/CSS</span></div>
+            </div>
+
+            <div class="project-card">
+                <h3>Online Food Ordering App</h3>
+                <span class="project-meta">DEPI Internship</span>
+                <p><strong>Challenge:</strong> Building a food online app.</p>
+                <p><strong>Action:</strong> Used Dart and Flutter for integrating the app.</p>
+                <div class="tags"><span>Flutter</span> <span>Dart</span> <span>API</span><span>Firebase</span></div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <div class="logo">YM<span>.</span></div>
+                <p>Building robust, high-performance cross-platform mobile applications.</p>
+            </div>
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about-me">About</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-social">
+                <h3>Connect</h3>
+                <div class="social-icons">
+                    <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 Designed & Built by Yasmine Moataz. All Rights Reserved.
+        </div>
+    </footer>
+
+    <script>
+        // Intersection Observer for reveal animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => { 
+                if (entry.isIntersecting) entry.target.classList.add('active'); 
+            });
+        }, { threshold: 0.1 });
+        
+        document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html> 
